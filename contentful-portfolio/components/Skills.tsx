@@ -7,25 +7,36 @@ const skills = [
   "Tailwind CSS",
   "Python",
   "Django",
-  "PostgreSQL",
   "Node.js",
+  "PostgreSQL",
+  "REST APIs",
   "Git & GitHub",
-  "AI Solutions",
+  "Contentful",
+  "Sanity",
+  "AI Integration",
+  "Responsive Design",
 ];
 
 export default function Skills() {
   return (
-    <section id="skills" className="bg-slate-900 py-24">
+    <section
+      id="skills"
+      className="border-y border-slate-800 bg-slate-900/50 py-24"
+    >
       <div className="mx-auto max-w-6xl px-6">
-        <h2 className="text-3xl font-bold md:text-4xl">
-          Skills
+        <p className="text-sm font-semibold uppercase tracking-widest text-blue-500">
+          Technology
+        </p>
+
+        <h2 className="mt-4 text-4xl font-bold">
+          My Technical Stack
         </h2>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="mt-10 flex flex-wrap gap-3">
           {skills.map((skill) => (
             <div
               key={skill}
-              className="rounded-lg border border-slate-700 bg-slate-950 p-5"
+              className="rounded-lg border border-slate-700 bg-slate-950 px-5 py-3 text-sm font-medium text-slate-200 transition hover:border-blue-500 hover:text-blue-400"
             >
               {skill}
             </div>
