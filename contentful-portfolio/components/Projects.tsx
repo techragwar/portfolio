@@ -1,43 +1,33 @@
-const projects = [
-  {
-    number: "01",
-    title: "AI Consultant Platform",
-    description:
-      "A professional platform for presenting AI consulting services, solutions, and business automation strategies.",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "AI"],
-  },
-  {
-    number: "02",
-    title: "Nonprofit Digital Platform",
-    description:
-      "A modern nonprofit platform designed to manage content, communicate impact, and support online donations.",
-    technologies: ["Next.js", "Contentful", "Stripe", "PostgreSQL"],
-  },
-  {
-    number: "03",
-    title: "News Aggregator",
-    description:
-      "A full-stack application that retrieves news from external APIs and presents it through a responsive interface.",
-    technologies: ["React", "Python", "Django", "PostgreSQL"],
-  },
-];
+import Link from "next/link";
+import { projects } from "@/data/projects";
 
 export default function Projects() {
   return (
     <section id="projects" className="py-24">
       <div className="mx-auto max-w-6xl px-6">
-        <p className="text-sm font-semibold uppercase tracking-widest text-blue-500">
-          Selected Work
-        </p>
+        <div className="flex items-end justify-between gap-6">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-widest text-blue-500">
+              Selected Work
+            </p>
 
-        <h2 className="mt-4 text-4xl font-bold">
-          Featured Projects
-        </h2>
+            <h2 className="mt-4 text-4xl font-bold">
+              Featured Projects
+            </h2>
+          </div>
+
+          <Link
+            href="/projects"
+            className="hidden text-sm font-semibold text-blue-400 hover:text-blue-300 md:block"
+          >
+            View All Projects →
+          </Link>
+        </div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {projects.map((project) => (
             <article
-              key={project.number}
+              key={project.slug}
               className="group rounded-2xl border border-slate-800 bg-slate-900 p-7 transition duration-300 hover:-translate-y-1 hover:border-blue-500/50"
             >
               <div className="text-sm font-medium text-blue-500">
@@ -63,14 +53,23 @@ export default function Projects() {
                 ))}
               </div>
 
-              <a
-                href="#contact"
+              <Link
+                href={`/projects/${project.slug}`}
                 className="mt-8 inline-block font-semibold text-blue-400 transition group-hover:text-blue-300"
               >
-                Learn More →
-              </a>
+                View Project →
+              </Link>
             </article>
           ))}
+        </div>
+
+        <div className="mt-8 md:hidden">
+          <Link
+            href="/projects"
+            className="font-semibold text-blue-400"
+          >
+            View All Projects →
+          </Link>
         </div>
       </div>
     </section>
