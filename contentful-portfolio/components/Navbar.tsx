@@ -1,49 +1,51 @@
+import Link from "next/link";
+
 export default function Navbar() {
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-800/80 bg-slate-950/90 backdrop-blur">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-slate-800 bg-slate-950/90 backdrop-blur">
+      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+        <Link
           href="/"
-          className="text-xl font-bold tracking-tight"
+          className="text-lg font-bold tracking-tight text-white"
         >
-          Dan Otieno<span className="text-blue-500">.</span>
-        </a>
+          Dan R. Otieno
+        </Link>
 
-        <div className="hidden items-center gap-8 md:flex">
-          <a
-            href="#about"
-            className="text-sm text-slate-300 transition hover:text-white"
+        <div className="hidden items-center gap-6 text-sm text-slate-300 md:flex">
+          <Link
+            href="/"
+            className="transition hover:text-white"
           >
-            About
-          </a>
+            Home
+          </Link>
 
-          <a
-            href="#skills"
-            className="text-sm text-slate-300 transition hover:text-white"
-          >
-            Skills
-          </a>
-
-          <a
-            href="#projects"
-            className="text-sm text-slate-300 transition hover:text-white"
+          <Link
+            href="/#projects"
+            className="transition hover:text-white"
           >
             Projects
-          </a>
+          </Link>
 
-          <a
-            href="#services"
-            className="text-sm text-slate-300 transition hover:text-white"
+          <Link
+            href="/#about"
+            className="transition hover:text-white"
           >
-            Services
-          </a>
+            About
+          </Link>
 
-          <a
-            href="#contact"
-            className="rounded-lg border border-slate-700 px-4 py-2 text-sm font-medium transition hover:border-blue-500 hover:text-blue-400"
+          <Link
+            href="/blog"
+            className="transition hover:text-white"
+          >
+            Blog
+          </Link>
+
+          <Link
+            href="/#contact"
+            className="rounded-full bg-blue-600 px-4 py-2 font-semibold text-white transition hover:bg-blue-500"
           >
             Contact
-          </a>
+          </Link>
         </div>
       </nav>
     </header>
