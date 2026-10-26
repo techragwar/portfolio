@@ -8,7 +8,7 @@ export default function Navbar() {
           href="/"
           className="text-lg font-bold tracking-tight text-white"
         >
-          Dan R. Otieno
+          Rosa Ragwar Tech
         </Link>
 
         <div className="hidden items-center gap-6 text-sm text-slate-300 md:flex">
