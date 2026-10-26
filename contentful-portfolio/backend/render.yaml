@@ -1,0 +1,27 @@
+# Render blueprint for the Stacks API.
+# A persistent disk keeps uploaded documents (SQLite) across restarts and deploys.
+# Disks need a paid instance type; on a free instance the data is wiped on every restart.
+services:
+  - type: web
+    name: stacks-api
+    runtime: python
+    plan: starter
+    rootDir: contentful-portfolio/backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    disk:
+      name: stacks-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: STACKS_DB
+        value: /var/data/stacks.db
+      # Add every site origin that serves the frontend, comma-separated, no trailing slash.
+      - key: STACKS_CORS_ORIGINS
+        value: https://danotieno-portfolio.netlify.app,http://localhost:3000
+      # Set the real value in the Render dashboard; it is never stored in git.
+      - key: ANTHROPIC_API_KEY
+        sync: false
