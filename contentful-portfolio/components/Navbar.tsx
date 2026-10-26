@@ -41,6 +41,13 @@ export default function Navbar() {
           </Link>
 
           <Link
+            href="/stacks"
+            className="transition hover:text-white"
+          >
+            Stacks
+          </Link>
+
+          <Link
             href="/#contact"
             className="rounded-full bg-blue-600 px-4 py-2 font-semibold text-white transition hover:bg-blue-500"
           >
