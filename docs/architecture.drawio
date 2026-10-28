@@ -1,0 +1,87 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Architecture" id="arch2">
+    <mxGraphModel dx="1000" dy="600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="760" math="0" shadows="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="title" value="Next.js (Netlify) + FastAPI (Render) with Contentful, Postgres and AWS S3" style="text;html=1;fontSize=18;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="10" width="800" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="users" value="Users&#xa;(Browser)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="50" y="300" width="40" height="80" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="editors" value="Content Editors" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="50" y="90" width="40" height="80" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="netlify" value="Netlify" style="swimlane;whiteSpace=wrap;html=1;rounded=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;startSize=30;" vertex="1" parent="1">
+          <mxGeometry x="180" y="140" width="240" height="300" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="next" value="&lt;b&gt;Next.js Frontend&lt;/b&gt;&lt;br&gt;SSR / SSG / ISR,&lt;br&gt;revalidate endpoint" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="netlify">
+          <mxGeometry x="20" y="100" width="200" height="90" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="render" value="Render" style="swimlane;whiteSpace=wrap;html=1;rounded=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;startSize=30;" vertex="1" parent="1">
+          <mxGeometry x="520" y="240" width="300" height="360" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="fastapi" value="&lt;b&gt;FastAPI Backend&lt;/b&gt;&lt;br&gt;REST API, auth,&lt;br&gt;business logic" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="render">
+          <mxGeometry x="50" y="70" width="200" height="90" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="pg" value="&lt;b&gt;Render Postgres&lt;/b&gt;&lt;br&gt;App data" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="render">
+          <mxGeometry x="80" y="230" width="140" height="90" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="contentful" value="&lt;b&gt;Contentful&lt;/b&gt;&lt;br&gt;Headless CMS&lt;br&gt;(Delivery / Preview API)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="520" y="60" width="200" height="90" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="s3" value="&lt;b&gt;AWS S3&lt;/b&gt;&lt;br&gt;Uploads / media bucket" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="900" y="420" width="200" height="90" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e1" value="HTTPS" style="endArrow=classic;startArrow=classic;html=1;" edge="1" parent="1" source="users" target="next">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e2" value="Fetch content (GraphQL / REST)" style="endArrow=classic;html=1;exitX=1;exitY=0.25;entryX=0;entryY=0.75;" edge="1" parent="1" source="next" target="contentful">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e3" value="Publish webhook → revalidate / rebuild" style="endArrow=classic;html=1;dashed=1;exitX=0;exitY=0.25;entryX=1;entryY=0.25;" edge="1" parent="1" source="contentful" target="next">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e4" value="REST / JSON (HTTPS)" style="endArrow=classic;startArrow=classic;html=1;" edge="1" parent="1" source="next" target="fastapi">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e5" value="SQL (internal network)" style="endArrow=classic;startArrow=classic;html=1;" edge="1" parent="render" source="fastapi" target="pg">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e6" value="boto3 / presigned URLs" style="endArrow=classic;startArrow=classic;html=1;" edge="1" parent="1" source="fastapi" target="s3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e7" value="Direct upload / download via presigned URL" style="endArrow=classic;startArrow=classic;html=1;dashed=1;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="users" target="s3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="70" y="660"/>
+              <mxPoint x="1000" y="660"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="e8" value="Author &amp; publish" style="endArrow=classic;html=1;" edge="1" parent="1" source="editors" target="contentful">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
